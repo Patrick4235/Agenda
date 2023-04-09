@@ -50,6 +50,7 @@ int MenuSecundario();				/*Se muestra cuando hay contactos que gestionar*/
 /*Relevante e importante*/
 void Insertar(struct Agenda Contactos[]);			/*Inserta contactos en la agenda*/
 void LeerArchivo();
+void EscribirArchivo();
 
 /*Relevante e importante*/
 void Buscar(struct Agenda Contactos[]);				/*Busca contactos en la agenda*/
@@ -103,6 +104,8 @@ Agenda::Agenda() {
 	  FUNCIÓN PRINCIPAL
 *****************************/
 int main(int argc, char *argv[]) {
+	
+	EscribirArchivo();
 	setlocale(LC_CTYPE, "spanish");
 	int x;											/*Almacena las opciones seleccionadas*/
 	int salir = 0;                                  /*bandera para salir*/
@@ -298,7 +301,7 @@ void LeerArchivo() {
 	ifstream archivo;
 	string texto;
 
-	archivo.open("../Contactos.txt", ios::in);
+	archivo.open("Contactos.txt", ios::in);
 
 	if (archivo.fail()) {
 		cout << "No se puedo encontrar el archivo";
@@ -309,7 +312,22 @@ void LeerArchivo() {
 		getline(archivo, texto);
 		cout << texto << endl;
 	}
+	
+}
 
+void EscribirArchivo(){
+	ofstream archivo;
+	
+	archivo.open("Contactos.txt",ios::app);
+	
+	if(archivo.fail()){
+		cout<<"No se pudo abri el archivo"<<endl;
+		exit(1);
+	}
+	
+	archivo<<"hola probando\n\n";
+	
+	archivo.close();
 }
 
 void Buscar(struct Agenda Contactos[]){
